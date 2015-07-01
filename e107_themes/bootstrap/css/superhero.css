@@ -7047,8 +7047,8 @@ a.list-group-item-danger.active:focus {
   border: none;
 }
 /*------------------------------*/
-.container-default { margin-top: 75px; }
-.container-hero { margin-top: 75px; }
+.container-default { margin-top: 65px; }
+.container-hero { margin-top: 65px; }
 .container-narrow { margin-top: 0px; }
 .forum-user-combo { text-align: center; }
 footer {
