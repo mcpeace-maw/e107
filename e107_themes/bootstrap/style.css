@@ -1,18 +1,18 @@
 /*  */
 body 						{ padding-bottom: 40px; }
-
-@media (min-width: 1000px){ 
-	
-body						{ padding-top: 75px;  }
-
-}
-
-
+.container-default { margin-top: 75px; }
+.container-hero { margin-top: 75px; }
+.container-narrow { margin-top: 0px; }
+.forum-user-combo { text-align: center; }
+.label-info { display: table; margin-left: auto; margin-right: auto; font-size: 12px;}
 
 .well 						{ padding:10px; }
 footer						{ padding:60px }
-
-
+@media (min-width: 768px){ 
+.nav-collapse.collapse {
+    display: inline;
+}
+}
 /*******************************************************************************************************************/
 
 
