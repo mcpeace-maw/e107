@@ -66,14 +66,14 @@ if(THEME_LAYOUT == 'docs')
 
 
 /*
-$OTHERNEWS_STYLE = '<div class="span4">
+$OTHERNEWS_STYLE = '<div class="col-md-4">
               		<h2>{NEWSTITLE}</h2>
               		<p>{NEWSSUMMARY}</p>
               		<p><a class="btn" href="{NEWSURL}">View details &raquo;</a></p>
             		</div><!--/span-->';
 
 
-$OTHERNEWS2_STYLE = '<div class="span4">
+$OTHERNEWS2_STYLE = '<div class="col-md-4">
               		<h2>{NEWSTITLE}</h2>
               		<p>{NEWSSUMMARY}</p>
               		<p><a class="btn" href="{NEWSURL}">View details &raquo;</a></p>
@@ -303,9 +303,9 @@ $HEADER['hero'] = '
                 </ul>
               </li>
             </ul>
-            <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="Email">
-              <input class="span2" type="password" placeholder="Password">
+            <form class="navbar-form navbar-right">
+              <input class="col-md-2" type="text" placeholder="Email">
+              <input class="col-md-2" type="password" placeholder="Password">
               <button type="submit" class="btn">Sign in</button>
             </form>
           </div><!--/.nav-collapse -->
