@@ -19,22 +19,22 @@ if(THEME_STYLE != 'style.css') // allow for drop-in bootstrap replacement. See h
 	switch (THEME_STYLE) 
 	{
 		case 'css/superhero.css':
-			e107::css('inline','@media (min-width: 768px) and (max-width: 992px) { .container-default, .container-hero { padding-top: 125px;  }  } ');	
+			e107::css('inline','@media (min-width: 768px) and (max-width: 992px) { .container-default, .container-hero { margin-top: 125px;  }  } ');	
 		break;
 
 		case 'css/united.css':
-			e107::css('inline','@media (min-width: 768px) and (max-width: 992px) { .container-default, .container-hero { padding-top: 50px;  }  } ');	
+			e107::css('inline','@media (min-width: 768px) and (max-width: 992px) { .container-default, .container-hero { margin-top: 50px;  }  } ');	
 		break;
 		
 		default:
-			e107::css('inline','@media (min-width: 768px) and (max-width: 992px) { .container-default, .container-hero { padding-top: 125px;  }  } ');	
+			e107::css('inline','@media (min-width: 768px) and (max-width: 992px) { .container-default, .container-hero { margin-top: 125px;  }  } ');	
 		break;
 	}	
 }
 else
 {
 	e107::css('url', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css');
-        e107::css('inline','@media (min-width: 768px) and (max-width: 992px) { .container-default, .container-hero { padding-top: 50px;  }  } ');
+        e107::css('inline','@media (min-width: 768px) and (max-width: 992px) { .container-default, .container-hero { margin-top: 125px;  }  } ');
 
 	 }
 	
