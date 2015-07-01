@@ -80,7 +80,7 @@ class theme_shortcodes extends e_shortcode
 		
 		$text = '
 		
-		<ul class="nav pull-right">
+		<ul class="nav navbar-nav navbar-right">
 		<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Logged in as '.USERNAME.' <b class="caret"></b></a>
 		<ul class="dropdown-menu">
 		<li><a href="'.e_HTTP.'usersettings.php"><i class="icon-cog"></i> Settings</a></li>
