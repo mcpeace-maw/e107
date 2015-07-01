@@ -23,7 +23,7 @@ class theme_shortcodes extends e_shortcode
 		if(!USERID) // Logged Out. 
 		{		
 			$text = '
-			<ul class="nav pull-right">';
+			<ul class="nav navbar-nav navbar-right">';
 			
 			if(deftrue('USER_REGISTRATION'))
 			{
