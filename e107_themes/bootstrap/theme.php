@@ -3,12 +3,12 @@ if ( ! defined('e107_INIT')) { exit(); }
 /*
  * This is a 100% Pure Bootstrap Theme for e107 v2 
  */
-define('BOOTSTRAP',true); 
+define("BOOTSTRAP", 3); 
+define("FONTAWESOME", 4);
 define("VIEWPORT", "width=device-width, initial-scale=1.0");
 define("BODYTAG", '<body data-spy="scroll" data-target=".bs-docs-sidebar" >');
 
 e107::lan('theme');
-e107::js('bootstrap','bootstrap.min.js');
 
 define("CSSORDER", "theme,core,other,plugin,inline"); // TODO try to avoid needing this. - corrects font-awesome overlap issue. 
 
@@ -19,36 +19,35 @@ if(THEME_STYLE != 'style.css') // allow for drop-in bootstrap replacement. See h
 	switch (THEME_STYLE) 
 	{
 		case 'css/superhero.css':
-			e107::css('inline','@media (min-width: 1000px){ body	{ padding-top: 100px;  }  } ');	
+			e107::css('inline','@media (min-width: 768px) and (max-width: 992px) { .container-default, .container-hero { padding-top: 125px;  }  } ');	
 		break;
 
-		case 'amelia.css':
-			e107::css('inline','@media (min-width: 1000px){ body	{ padding-top: 70px;  }  } ');	
+		case 'css/united.css':
+			e107::css('inline','@media (min-width: 768px) and (max-width: 992px) { .container-default, .container-hero { padding-top: 50px;  }  } ');	
 		break;
 		
 		default:
-			e107::css('inline','@media (min-width: 1000px){ body	{ padding-top: 65px;  }  } ');	
+			e107::css('inline','@media (min-width: 768px) and (max-width: 992px) { .container-default, .container-hero { padding-top: 125px;  }  } ');	
 		break;
 	}	
 }
 else
 {
-	e107::css('bootstrap','bootstrap.min.css');	
-	e107::css('inline','@media (min-width: 1000px){ body	{ padding-top: 75px;  } 
-	
+	e107::css('url', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css');
+        e107::css('inline','@media (min-width: 768px) and (max-width: 992px) { .container-default, .container-hero { padding-top: 50px;  }  } ');
+
 	 }
 	
 	 ');
 }
 
-e107::css('bootstrap','bootstrap-responsive.min.css');
 e107::css('bootstrap','jquery-ui.custom.css');
-e107::css('url', "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css");
+e107::css('url', "https://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
 
 e107::css('theme', 'js/google-code-prettify/prettify.css');
 e107::js('theme', "js/google-code-prettify/prettify.js");
 e107::css('page', 'css/page.navigation.css', 'jquery');
-
+e107::js("url", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js");
 
 
 if(THEME_LAYOUT == 'docs')
@@ -110,7 +109,7 @@ function tablestyle($caption, $text, $mode='')
 	if($mode == 'wm') // Welcome Message Style. 
 	{
 		
-		echo '<div class="hero-unit">
+		echo '<div class="hero-unit jumbotron">
             <h1>'.$caption.'</h1>
             <p>'.$text.'</p>
           </div>';	
@@ -187,30 +186,32 @@ $SC_WRAPPER['NAVIGATION|s'] = '<div class="well sidebar-nav">{---}</div><!--/.we
 
 
 $HEADER['default'] = '
-<div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="'.SITEURL.'">{SITENAME}</a>
-          <div class="nav-collapse collapse">
-           {NAVIGATION=main}
-           <div class="pull-right">{BOOTSTRAP_USERNAV}</div>
-          </div><!--/.nav-collapse -->
+<nav class="navbar navbar-inverse navbar-fixed-top"  role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="'.SITEURL.'">{SITENAME}</a>
         </div>
-      </div>
+        <div id="navbar" class="nav-collapse collapse">
+           {NAVIGATION=main}
+           {BOOTSTRAP_USERNAV}
+
+        </div>
+
     </div>
-<div class="container-fluid">
-	<div class="row-fluid">
-		 <div class="span3">
+</nav>
+<div class="container-fluid container-default">
+	<div class="row">
+		 <div class="col-md-3">
            {NAVIGATION|s=side}          
           {SETSTYLE=menu}
           {MENU=1}
         </div><!--/span-->
-		<div class="span9">
+		<div class="col-md-9">
 		 {SETSTYLE=default}
 		 	{WMESSAGE}
 ';
@@ -225,9 +226,11 @@ $FOOTER['default'] = '
 
 <hr>
 
-<footer class="center"> 
-	{SITEDISCLAIMER}
-</footer>
+<div class="row">
+    <footer class="center"> 
+	    {SITEDISCLAIMER}
+    </footer>
+</div>
 
 </div><!--/.fluid-container-->';
 
@@ -239,10 +242,10 @@ $FOOTER['default-home'] = '
 	
 		 {SETSTYLE=span4}
 		 
-		 <div class="row-fluid">
+		 <div class="row">
             {MENU=2}
       	</div><!--/row-->
-		 <div class="row-fluid">
+		 <div class="row">
             {MENU=3}
       	</div><!--/row-->	
       	
@@ -250,10 +253,11 @@ $FOOTER['default-home'] = '
 	</div><!--/row-->
 
 <hr>
-
-<footer class="center"> 
+<div class="row">
+    <footer class="center"> 
 		{SITEDISCLAIMER} 
-</footer>
+    </footer>
+</div>
 
 </div><!--/.fluid-container-->';
 
@@ -271,28 +275,29 @@ $FOOTER['default-home'] = '
 
 $HEADER['hero'] = '
 
-	 <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Project name</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-hero">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="nav-collapse collapse">
+            <ul class="nav navbar-nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="#">Action</a></li>
                   <li><a href="#">Another action</a></li>
                   <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li class="nav-header">Nav header</li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
                   <li><a href="#">Separated link</a></li>
                   <li><a href="#">One more separated link</a></li>
                 </ul>
@@ -305,13 +310,13 @@ $HEADER['hero'] = '
             </form>
           </div><!--/.nav-collapse -->
         </div>
-      </div>
+
     </div>
 
     <div class="container">
 
       <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">';
+      <div class="hero-unit jumbotron">';
 	  
 	  /*
         <h1>Hello, world!</h1>
@@ -326,17 +331,17 @@ $FOOTER['hero'] = '
 
       <!-- Example row of columns -->
       <div class="row">
-        <div class="span4">
+        <div class="col-md-4>
           <h2>Heading</h2>
           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
           <p><a class="btn" href="#">View details &raquo;</a></p>
         </div>
-        <div class="span4">
+        <div class="col-md-4">
           <h2>Heading</h2>
           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
           <p><a class="btn" href="#">View details &raquo;</a></p>
        </div>
-        <div class="span4">
+        <div class="col-md-4">
           <h2>Heading</h2>
           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <p><a class="btn" href="#">View details &raquo;</a></p>
@@ -345,7 +350,7 @@ $FOOTER['hero'] = '
 
       <hr>
 
-      <footer>
+      <footer class="col-md-12">
         <p>&copy; Company 2012</p>
       </footer>
 
@@ -356,10 +361,10 @@ $FOOTER['hero'] = '
 //FIXME insert shortcodes while maintaing classes. 
 
 $HEADER['marketing-narrow'] = '
- <div class="container-narrow">
+ <div class="container container-narrow">
 
       <div class="masthead">
-        <ul class="nav nav-pills pull-right">
+        <ul class="nav nav-pills navbar-right">
           <li class="active"><a href="#">Home</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
@@ -383,8 +388,8 @@ $FOOTER['marketing-narrow'] = '
 
       <hr>
 
-      <div class="row-fluid marketing">
-        <div class="span6">
+      <div class="row marketing">
+        <div class="col-md-6">
           <h4>Subheading</h4>
           <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
 
@@ -395,7 +400,7 @@ $FOOTER['marketing-narrow'] = '
           <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
         </div>
 
-        <div class="span6">
+        <div class="col-md-6">
           <h4>Subheading</h4>
           <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
 
@@ -409,7 +414,7 @@ $FOOTER['marketing-narrow'] = '
 
       <hr>
 
-      <div class="footer">
+      <div class="footer col-md-12">
         <p>&copy; Company 2012</p>
       </div>
 
@@ -436,21 +441,24 @@ $HEADER['docs'] = <<<TMPL
 
   <!-- Navbar
     ================================================== -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<div class="navbar navbar-inverse navbar-fixed-top">
+     <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="./index.html">Bootstrap</a>
-          <div class="nav-collapse collapse">
-             {NAVIGATION=main}
-          </div>
+          <a class="navbar-brand" href="./index.html">Bootstrap</a>
+
+
+
         </div>
-      </div>
-    </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            {NAVIGATION=main}
+        </div>
+     </div>
+</div>
 
 <!-- Subhead
 ================================================== -->
@@ -468,13 +476,13 @@ $HEADER['docs'] = <<<TMPL
     ================================================== -->
     <div class="row">
     
-      <div class="span3 bs-docs-sidebar">
+      <div class="col-md-3 bs-docs-sidebar">
       {SETSTYLE=navdoc}
 	  {PAGE_NAVIGATION: template=navdocs&auto=1}
       </div>
 		{SETSTYLE=doc}
 	  
-      <div class="span9">
+      <div class="col-md-9">
 
 
 
@@ -490,7 +498,7 @@ $FOOTER['docs'] = <<<TMPL
 
     <!-- Footer
     ================================================== -->
-    <footer class="footer">
+    <footer class="footer col-md-12">
       <div class="container">
         <p>{SITEDISCLAIMER}</p>
         <!--
